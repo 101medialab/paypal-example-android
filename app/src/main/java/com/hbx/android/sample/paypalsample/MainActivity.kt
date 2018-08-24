@@ -3,6 +3,7 @@ package com.hbx.android.sample.paypalsample
 import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.webkit.WebView
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**
@@ -23,6 +24,9 @@ class MainActivity : AppCompatActivity() {
     private fun initWebView() {
         webview.settings.userAgentString = "PayPalSample/${BuildConfig.VERSION_NAME} (${Build.MANUFACTURER}; ${Build.MODEL}); os=${Build.VERSION.SDK_INT}"
         webview.settings.javaScriptEnabled = true
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            WebView.setWebContentsDebuggingEnabled(true)
+        }
 
         swipeRefreshLayout.setOnRefreshListener {
             webview.loadUrl(URL)
